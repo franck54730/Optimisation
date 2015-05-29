@@ -3,6 +3,7 @@ package optimisation.modele;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Clavier {
@@ -12,6 +13,18 @@ public class Clavier {
 	public static int[][] bigramme = new int[26][26];
 	public static Clavier etatInitial = new Clavier();
 	private Touche[][] clavier = new Touche[largeur][hauteur];
+	
+	public Clavier(){
+		
+	}
+	
+	public Clavier(Clavier c){
+		for(int x = 0; x < largeur; x++){
+			for (int y = 0; y < hauteur; y++) {
+				this.clavier[x][y] = c.clavier[x][y];
+			}
+		}
+	}
 	
 	public char getLettre(int x, int y){
 		return clavier[x][y].getLettreToChar();
@@ -61,6 +74,10 @@ public class Clavier {
 		etatInitial.clavier[7][3] = new Touche(Touche.VIDE);
 		etatInitial.clavier[8][3] = new Touche(Touche.VIDE);
 		etatInitial.clavier[9][3] = new Touche(Touche.VIDE);
+	}
+	
+	public ArrayList<Clavier> getFils(){
+		return null;
 	}
 	
 	public static void genererBigramme(){

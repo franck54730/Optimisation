@@ -8,20 +8,24 @@ import java.util.Observable;
 import java.util.Queue;
 import java.util.Scanner;
 
+import optimisation.modele.algorithme.AlgoRecuit;
+
 public class Modele extends Observable implements Runnable{
 
 	public enum Algo {RECUIT,TABOU};
 	
 	private LinkedList<Clavier> historique;
-	private Algo algo;
+	private Algo algo = Algo.RECUIT;
 	private int temperature;
 	private int tailleListe;
+	private Clavier clavier;
 	
 	public Modele(){
 		historique = new LinkedList<Clavier>();
 		Clavier.genererEtatInitial();
 		Clavier.genererBigramme();
-		historique.add(Clavier.etatInitial);
+		clavier = Clavier.etatInitial;
+		historique.add(clavier);
 		miseAJour();
 	}
 
@@ -53,10 +57,40 @@ public class Modele extends Observable implements Runnable{
 		setChanged();
 		notifyObservers();
 	}
+	
+	public void reinitialiserClavier(){
+		clavier = Clavier.etatInitial;
+		historique.add(Clavier.etatInitial);
+		miseAJour();
+	}
 
+	public void randomClavier(){
+		clavier = Clavier.etatInitial;
+		historique.add(Clavier.etatInitial);
+		miseAJour();
+	}
+	
 	@Override
 	public void run() {
-		
+		if(algo == Algo.RECUIT){
+			AlgoRecuit algo = new AlgoRecuit(this);
+			algo.executer();
+		}else{
+			AlgoRecuit algo = new AlgoRecuit(this);
+			algo.executer();
+		}
+	}
+	
+	public boolean hasNext(){
+		return historique.isEmpty();
+	}
+	
+	public Clavier next(){
+		return historique.poll();
+	}
+
+	public Clavier getClavierInitial() {
+		return new Clavier(clavier);
 	}
 
 }
