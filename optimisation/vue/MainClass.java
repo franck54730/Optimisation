@@ -23,7 +23,7 @@ public class MainClass extends JFrame{
 	    this.add(vg, BorderLayout.CENTER);
         this.add(vb, BorderLayout.SOUTH);
         this.setJMenuBar(new VueMenu(m));
-		
+		m.run();
         m.miseAJour();
         
         pack() ;

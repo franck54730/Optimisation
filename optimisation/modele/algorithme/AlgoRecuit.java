@@ -12,19 +12,37 @@ public class AlgoRecuit {
 	}
 	
 	public void executer(){
-		int temperature = modele.getTemperature();
-		Clavier initial = modele.getClavierInitial();
+		double temperature = modele.getTemperature();
+		Clavier clavier = modele.getClavierInitial();
+//		System.out.println("clavier : \n"+clavier);
+		int iteration = 0;
+		int e = clavier.getEnnergie();
+		System.out.println("e : "+e);
 		
+		while(temperature>0 && (iteration < modele.getTailleListe() || e < Clavier.EMAX)){
+//			System.out.println("clavier deb deb : \n"+clavier);
+			Clavier voisin = clavier.voisin();
+
+			int newE = voisin.getEnnergie();
+			int deltaE = e-newE;
+			double rapport = -((double)deltaE/(double)temperature);
+			if(deltaE<0){
+				System.out.println("rapport : "+rapport);
+				System.out.println("exp : "+Math.exp(rapport));
+			}
+			System.out.println();
+			if(newE > e || Math.random()<Math.exp(rapport)){
+//				System.out.println("prise");
+				clavier = voisin;
+				e = newE;
+				temperature-= 0.1;
+				iteration++;
+			}
+//			System.out.println("clavier fin : \n"+clavier+"\n\n\n\n\n");
+		}
+
+		System.out.println("final : "+clavier.getEnnergie());
 		
-//		s := s0
-//		e := E(s)
-//		k := 0
-//		tant que k < kmax et e > emax
-//		  sn := voisin(s)
-//		  en := E(sn)
-//		  si en < e ou aléatoire() < P(en - e, temp(k/kmax)) alors
-//		    s := sn; e := en
-//		  k := k + 1
-//		retourne s
+		System.out.println(clavier);
 	}
 }

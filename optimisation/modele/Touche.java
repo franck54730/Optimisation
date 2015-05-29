@@ -44,4 +44,16 @@ public class Touche {
 	public int getLettreToInt(){
 		return lettre;
 	}
+
+	public int valeurBigramme(Touche fils) {
+		int rep = 0;
+		if(this.lettre != VIDE && fils.lettre != VIDE){
+			rep = Clavier.bigramme[this.lettre][fils.lettre];
+		}
+		return rep;
+	}
+	
+	public String toString(){
+		return "{"+alphabet[lettre]+"}";
+	}
 }
