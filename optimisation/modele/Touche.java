@@ -56,4 +56,16 @@ public class Touche {
 	public String toString(){
 		return "{"+alphabet[lettre]+"}";
 	}
+	
+	public boolean equals(Object o){
+		try{
+			Touche t = (Touche) o;
+			if(this.lettre != t.lettre)
+				return false;
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 }

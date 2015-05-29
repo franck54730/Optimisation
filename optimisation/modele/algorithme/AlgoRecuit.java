@@ -30,10 +30,11 @@ public class AlgoRecuit {
 				clavier = voisin;
 				e = newE;
 				temperature-= 0.1;
+				modele.pushClavier(clavier);
 				iteration++;
 			}
-			modele.pushClavier(clavier);
 		}
+		modele.hasNext();
 		System.out.println(clavier);
 		System.out.println(clavier.getEnnergie());
 	}

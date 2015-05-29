@@ -155,4 +155,55 @@ public class Clavier {
 		}
 		return sb.toString();
 	}
+	
+	public ArrayList<Clavier> filsNonTabou(ArrayList<Clavier> tabou){
+		ArrayList<Clavier> rep = new ArrayList<Clavier>();
+		for(int x = 0; x < largeur; x++){
+			for(int y = 0; y < hauteur; y++){
+				if(x != largeur-1){
+					Clavier fils = this.swapDroite(x, y);
+					if(!tabou.contains(fils))
+						rep.add(fils);
+				}
+				if(y != hauteur-1){
+					Clavier fils = this.swapBas(x, y);
+					if(!tabou.contains(fils))
+						rep.add(fils);
+				}
+			}
+		}
+		return rep;
+	}
+	
+	public Clavier swapDroite(int x,int y){
+		Clavier rep = new Clavier(this);
+		Touche tmp = rep.clavier[x][y];
+		rep.clavier[x][y] = rep.clavier[x+1][y];
+		rep.clavier[x+1][y] = tmp;
+		return rep;
+	}
+	
+	public Clavier swapBas(int x,int y){
+		Clavier rep = new Clavier(this);
+		Touche tmp = rep.clavier[x][y];
+		rep.clavier[x][y] = rep.clavier[x][y+1];
+		rep.clavier[x][y+1] = tmp;
+		return rep;
+	}
+	
+	public boolean equals(Object o){
+		try{
+			Clavier c = (Clavier) o;
+			for(int x = 0; x < largeur; x++){
+				for(int y = 0; y < hauteur; y++){
+					if(!this.clavier[x][y].equals(c.clavier[x][y]))
+						return false;
+				}
+			}
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 }

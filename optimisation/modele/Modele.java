@@ -4,15 +4,16 @@ import java.util.LinkedList;
 import java.util.Observable;
 
 import optimisation.modele.algorithme.AlgoRecuit;
+import optimisation.modele.algorithme.AlgoTabou;
 
 public class Modele extends Observable implements Runnable{
 
 	public enum Algo {RECUIT,TABOU};
 	
 	private LinkedList<Clavier> historique;
-	private Algo algo = Algo.RECUIT;
+	private Algo algo = Algo.TABOU;
 	private double temperature = 1000;
-	private int tailleListe = 10000000;
+	private int tailleListe = 2000;
 	private Clavier clavier;
 	
 	public Modele(){
@@ -74,14 +75,16 @@ public class Modele extends Observable implements Runnable{
 			AlgoRecuit algo = new AlgoRecuit(this);
 			algo.executer();
 		}else{
-			AlgoRecuit algo = new AlgoRecuit(this);
+			AlgoTabou algo = new AlgoTabou(this);
 			algo.executer();
 		}
 		miseAJour();
 	}
 	
 	public boolean hasNext(){
+		System.out.println(historique.size());
 		return historique.isEmpty();
+		
 	}
 	
 	public Clavier next(){
