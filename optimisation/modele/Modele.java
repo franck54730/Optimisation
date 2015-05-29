@@ -92,4 +92,8 @@ public class Modele extends Observable implements Runnable{
 		return new Clavier(clavier);
 	}
 
+	public void pushClavier(Clavier clavier2) {
+		historique.add(clavier2);
+	}
+
 }
