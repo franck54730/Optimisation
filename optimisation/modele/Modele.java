@@ -11,8 +11,8 @@ public class Modele extends Observable implements Runnable{
 	
 	private LinkedList<Clavier> historique;
 	private Algo algo = Algo.RECUIT;
-	private int temperature = 10;
-	private int tailleListe = 5;
+	private double temperature = 1000;
+	private int tailleListe = 10000000;
 	private Clavier clavier;
 	
 	public Modele(){
@@ -33,7 +33,7 @@ public class Modele extends Observable implements Runnable{
 		miseAJour();
 	}
 
-	public int getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
@@ -90,6 +90,10 @@ public class Modele extends Observable implements Runnable{
 
 	public Clavier getClavierInitial() {
 		return new Clavier(clavier);
+	}
+
+	public void pushClavier(Clavier clavier2) {
+		historique.add(clavier2);
 	}
 
 }

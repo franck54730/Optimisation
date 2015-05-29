@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Clavier {
 	
+	public static final int EMAX = 10000;
 	public static int largeur = 10;
 	public static int hauteur = 4;
 	public static int[][] bigramme = new int[26][26];
@@ -94,5 +96,63 @@ public class Clavier {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	};
+	}
+
+	public int getEnnergie() {
+		int rep = 0;
+		for(int x = 0; x < largeur; x++){
+			for (int y = 0; y < hauteur; y++) {
+				Touche t = clavier[x][y];
+				if(x > 0){//gauche
+					Touche fils = clavier[x-1][y];
+					rep += t.valeurBigramme(fils);
+				}
+				if(x < largeur -1){//droite
+					Touche fils = clavier[x+1][y];
+					rep += t.valeurBigramme(fils);
+				}
+				if(y > 0){//haut
+					Touche fils = clavier[x][y-1];
+					rep += t.valeurBigramme(fils);
+				}
+				if(y < hauteur-1){//bas
+					Touche fils = clavier[x][y+1];
+					rep += t.valeurBigramme(fils);
+				}
+			}
+		}
+		return rep;
+	}
+
+	public Clavier voisin() {
+		Clavier rep = new Clavier(this);
+		Random r = new Random();
+		int x1= r.nextInt(largeur);
+		int x2= r.nextInt(largeur);
+		
+		int y1= r.nextInt(hauteur);
+		int y2= r.nextInt(hauteur);
+		
+		while(clavier[x1][y1].getLettreToInt() == Touche.VIDE && rep.clavier[x2][y2].getLettreToInt() == Touche.VIDE){
+			x1= r.nextInt(largeur);
+			x2= r.nextInt(largeur);
+			y1= r.nextInt(hauteur);
+			y2= r.nextInt(hauteur);
+		}
+		Touche tmp = rep.clavier[x1][y1];
+		rep.clavier[x1][y1] = rep.clavier[x2][y2];
+		rep.clavier[x2][y2] = tmp;
+		return rep;
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < hauteur; i++){
+			for (int j = 0; j < largeur; j++) {
+				sb.append(clavier[j][i]+" ");
+			}
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 }

@@ -12,19 +12,29 @@ public class AlgoRecuit {
 	}
 	
 	public void executer(){
-		int temperature = modele.getTemperature();
-		Clavier initial = modele.getClavierInitial();
+		double temperature = modele.getTemperature();
+		Clavier clavier = modele.getClavierInitial();
+		modele.pushClavier(clavier);
+		System.out.println(clavier);
+		System.out.println(clavier.getEnnergie());
+		int iteration = 0;
+		int e = clavier.getEnnergie();
 		
-		
-//		s := s0
-//		e := E(s)
-//		k := 0
-//		tant que k < kmax et e > emax
-//		  sn := voisin(s)
-//		  en := E(sn)
-//		  si en < e ou aléatoire() < P(en - e, temp(k/kmax)) alors
-//		    s := sn; e := en
-//		  k := k + 1
-//		retourne s
+		while(temperature>0 && (iteration < modele.getTailleListe() || e < Clavier.EMAX)){
+			Clavier voisin = clavier.voisin();
+
+			int newE = voisin.getEnnergie();
+			int deltaE = e-newE;
+			double rapport = -((double)deltaE/(double)temperature);
+			if(newE > e || Math.random()<Math.exp(rapport)){
+				clavier = voisin;
+				e = newE;
+				temperature-= 0.1;
+				iteration++;
+			}
+			modele.pushClavier(clavier);
+		}
+		System.out.println(clavier);
+		System.out.println(clavier.getEnnergie());
 	}
 }
