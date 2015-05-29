@@ -6,11 +6,12 @@ import javax.swing.JFrame;
 
 import optimisation.modele.Modele;
 
+@SuppressWarnings("serial")
 public class MainClass extends JFrame{
 
 	public MainClass(){
 		
-		super("Projet RepCo - Logiciel de résolution de labyrinthe");
+		super("Projet Optimisation - Gestion de clavier");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    Modele m = new Modele();

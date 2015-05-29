@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import optimisation.modele.Modele;
 
+@SuppressWarnings("serial")
 public class VueBoutons extends JPanel implements Observer{
 	
 	protected Modele m;
@@ -19,7 +20,6 @@ public class VueBoutons extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		
 	}
 

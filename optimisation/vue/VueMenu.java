@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 
 import optimisation.modele.Modele;
 
+@SuppressWarnings("serial")
 public class VueMenu extends JMenuBar implements Observer{
 	
 	protected Modele m;
@@ -32,7 +33,6 @@ public class VueMenu extends JMenuBar implements Observer{
 	protected JMenuItem jMenuItemAStar;
 
 	public VueMenu(Modele mod) {
-		// d
 		super();
 		this.m = mod;
 		m.addObserver(this);
@@ -40,7 +40,6 @@ public class VueMenu extends JMenuBar implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		
 	}
 
