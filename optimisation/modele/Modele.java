@@ -16,8 +16,8 @@ public class Modele extends Observable implements Runnable{
 	
 	private LinkedList<Clavier> historique;
 	private Algo algo = Algo.RECUIT;
-	private int temperature;
-	private int tailleListe;
+	private int temperature = 10;
+	private int tailleListe = 5;
 	private Clavier clavier;
 	
 	public Modele(){
@@ -35,6 +35,7 @@ public class Modele extends Observable implements Runnable{
 
 	public void setAlgo(Algo algo) {
 		this.algo = algo;
+		miseAJour();
 	}
 
 	public int getTemperature() {
@@ -43,6 +44,7 @@ public class Modele extends Observable implements Runnable{
 
 	public void setTemperature(int temperature) {
 		this.temperature = temperature;
+		miseAJour();
 	}
 
 	public int getTailleListe() {
@@ -51,6 +53,7 @@ public class Modele extends Observable implements Runnable{
 
 	public void setTailleListe(int tailleListe) {
 		this.tailleListe = tailleListe;
+		miseAJour();
 	}
 	
 	public void miseAJour() {
@@ -79,6 +82,7 @@ public class Modele extends Observable implements Runnable{
 			AlgoRecuit algo = new AlgoRecuit(this);
 			algo.executer();
 		}
+		miseAJour();
 	}
 	
 	public boolean hasNext(){
