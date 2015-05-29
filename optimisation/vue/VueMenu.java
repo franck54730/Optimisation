@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 
 import optimisation.controleur.EcouteurAlgoRecuit;
 import optimisation.controleur.EcouteurAlgoTabou;
+import optimisation.controleur.EcouteurQuitter;
 import optimisation.modele.Modele;
 
 @SuppressWarnings("serial")
@@ -35,6 +36,7 @@ public class VueMenu extends JMenuBar implements Observer{
 		
 		jMenuItemNouveau = new JMenuItem("Nouveau");
 		jMenuItemQuitter = new JMenuItem("Quitter");
+		jMenuItemQuitter.addActionListener(new EcouteurQuitter(m));
 		
 		jMenuItemTabou = new JMenuItem("Tabou");
 		jMenuItemTabou.addActionListener(new EcouteurAlgoTabou(m));

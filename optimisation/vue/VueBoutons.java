@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import optimisation.controleur.EcouteurPlay;
 import optimisation.modele.Modele;
+import optimisation.modele.Modele.Algo;
 
 @SuppressWarnings("serial")
 public class VueBoutons extends JPanel implements Observer{
@@ -26,7 +27,9 @@ public class VueBoutons extends JPanel implements Observer{
 	protected JLabel jLabelTaille;
 	protected JButton jButtonPlay;
 	protected JLabel jLabelAlgo;
-
+	protected Panel panelPlay;
+	protected Panel panelDetails;
+	
 	public VueBoutons(Modele mod) {
 		super();
 		this.m = mod;
@@ -39,7 +42,7 @@ public class VueBoutons extends JPanel implements Observer{
 		jLabelAlgo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		this.add(jLabelAlgo);
 		
-		Panel panelPlay = new Panel();
+		panelPlay = new Panel();
 		this.jButtonPlay = new JButton();
 		jButtonPlay.setIcon(iconPlay);
 		jButtonPlay.setPreferredSize(new Dimension(32,32));
@@ -47,7 +50,7 @@ public class VueBoutons extends JPanel implements Observer{
 		panelPlay.add(jButtonPlay);
 		this.add(panelPlay);
 		
-		Panel panelDetails = new Panel();
+		panelDetails = new Panel();
 		panelDetails.setLayout(new GridLayout(2, 1, 0, 0));
 		this.jLabelTaille = new JLabel();
 		jLabelTaille.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -60,13 +63,14 @@ public class VueBoutons extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(m.getAlgo() != null){
-			jLabelAlgo.setText("Algorithme : "+m.getAlgo());
+		jLabelAlgo.setText("Algorithme : "+m.getAlgo());
+		if(m.getAlgo() == Algo.RECUIT){
+			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
+			jLabelTemperature.setText("Temperature : "+m.getTemperature());
 		}else{
-			jLabelAlgo.setText("Algorithme à choisir");
+			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
+			jLabelTemperature.setText("Pas de temperature");
 		}
-		jLabelTaille.setText("Taille liste : "+m.getTailleListe());
-		jLabelTemperature.setText("Temperature : "+m.getTemperature());
 	}
 
 }
