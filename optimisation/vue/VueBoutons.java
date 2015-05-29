@@ -12,7 +12,6 @@ public class VueBoutons extends JPanel implements Observer{
 	protected Modele m;
 
 	public VueBoutons(Modele mod) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.m = mod;
 		m.addObserver(this);

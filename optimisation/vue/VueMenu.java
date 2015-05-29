@@ -32,7 +32,7 @@ public class VueMenu extends JMenuBar implements Observer{
 	protected JMenuItem jMenuItemAStar;
 
 	public VueMenu(Modele mod) {
-		// TODO Auto-generated constructor stub
+		// d
 		super();
 		this.m = mod;
 		m.addObserver(this);
