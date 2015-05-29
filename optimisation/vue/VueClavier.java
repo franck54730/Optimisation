@@ -21,19 +21,19 @@ public class VueClavier extends JPanel implements Observer{
 		super();
 		this.m = mod;
 		m.addObserver(this);
-		this.setPreferredSize(new Dimension(900,400));
+		this.setPreferredSize(new Dimension(500,200));
 		tabTouche = new ToucheGraphique[4][10];
-		this.setLayout(new GridLayout(4, 10, 3, 3));
+		this.setLayout(new GridLayout(4, 10, 0, 0));
+		for (int i = 0; i < tabTouche.length; i++) {
+			for (int j = 0; j < tabTouche[0].length; j++) {
+				tabTouche[i][j] = new ToucheGraphique('X');
+				this.add(tabTouche[i][j]);
+			}
+		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		for (int i = 0; i < tabTouche.length; i++) {
-			for (int j = 0; j < tabTouche[0].length; j++) {
-				tabTouche[i][j] = new ToucheGraphique(i,j);
-				//tabTouche[i][j].setText(tabTouche[i][j].getLettre()+"");
-				this.add(tabTouche[i][j]);
-			}
-		}
+		revalidate();
     }
 }

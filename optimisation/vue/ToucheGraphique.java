@@ -1,42 +1,31 @@
 package optimisation.vue;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class ToucheGraphique extends JButton {
 	
-	protected int x;
-	protected int y;
-	//protected char lettre;
+	protected char lettre;
 	
-	public ToucheGraphique(int x, int y){
-		this.x = x;
-		this.y = y;
-		//this.lettre = lettre;
+	public ToucheGraphique(char lettre){
+		this.lettre = lettre;
+		this.setEnabled(false);
+		this.setBackground(Color.GRAY);
 	}
 
-	public int getX() {
-		return x;
+	public char getLettre() {
+		return lettre;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setLettre(char lettre) {
+		this.lettre = lettre;
 	}
 
-	public int getY() {
-		return y;
+	@Override
+	public String toString() {
+		return "ToucheGraphique [lettre=" + lettre + "]";
 	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-//	public char getLettre() {
-//		return lettre;
-//	}
-//
-//	public void setLettre(char lettre) {
-//		this.lettre = lettre;
-//	}
-//	
+	
 }
