@@ -20,6 +20,7 @@ public class Modele extends Observable implements Runnable{
 	protected int tempsExecution = 0;
 	protected int objectifAvant = 0;
 	protected int objectifApres = 0;
+	protected int nbIter = 0;
 	
 	public Modele(){
 		historique = new LinkedList<Clavier>();
@@ -128,6 +129,8 @@ public int getObjectifAvant() {
 	
 	@Override
 	public void run() {
+		long tempsDepart = System.currentTimeMillis();
+		nbIter = 0;
 		if(algo == Algo.RECUIT){
 			AlgoRecuit algo = new AlgoRecuit(this);
 			algo.executer();
@@ -135,7 +138,17 @@ public int getObjectifAvant() {
 			AlgoTabou algo = new AlgoTabou(this);
 			algo.executer();
 		}
+		long tempsFin = System.currentTimeMillis();
+		tempsExecution = (int) (tempsFin-tempsDepart);
 		miseAJour();
+	}
+	
+	public void incIter(){
+		nbIter++;
+	}
+	
+	public int getNbIteration(){
+		return nbIter;
 	}
 	
 	public boolean hasNext(){
