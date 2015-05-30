@@ -15,7 +15,10 @@ public class EcouteurAleatoire implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		m.setRun(false);
 		m.randomClavier();
+		m.setObjectifApres(-1);
+		m.setIteration(-1);
+		m.miseAJour();
 	}
-
 }

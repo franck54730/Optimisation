@@ -1,5 +1,7 @@
 package optimisation.vue;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 
 import optimisation.modele.Modele;
@@ -9,12 +11,15 @@ public class VueGraphique extends JPanel{
 	
 	protected Modele m;
 	
-	protected VueClavier vl;
+	protected VueClavier vcl;
+	protected VueConsole vco;
 
 	public VueGraphique(Modele mod) {
 		this.m=mod;
-		vl = new VueClavier(m);
-		this.add(vl);
+		vcl = new VueClavier(m);
+		this.add(vcl, BorderLayout.WEST);
+		vco = new VueConsole(m);
+		this.add(vco, BorderLayout.WEST);
+		
 	}
-
 }

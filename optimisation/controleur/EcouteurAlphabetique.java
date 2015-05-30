@@ -15,7 +15,11 @@ public class EcouteurAlphabetique implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		m.setRun(false);
 		m.reinitialiserClavier();
+		m.setObjectifApres(-1);
+		m.setIteration(-1);
+		m.miseAJour();
 	}
 
 }

@@ -27,7 +27,7 @@ public class VueMenu extends JMenuBar implements Observer{
 	protected JMenu jMenuAlgorithme;
 	protected JMenu JMenuOptions;
 	
-	protected JMenuItem jMenuItemNouveau;
+	protected JMenuItem jMenuItemAlphabetique;
 	protected JMenuItem jMenuItemAleatoire;
 	protected JMenuItem jMenuItemQuitter;
 	
@@ -44,18 +44,18 @@ public class VueMenu extends JMenuBar implements Observer{
 		
 		jMenuFichier = new JMenu("Fichier");
 		jMenuAlgorithme = new JMenu("Algorithme");
-		JMenuOptions = new JMenu("Option(s)");
+		JMenuOptions = new JMenu("Option");
 		
-		jMenuItemNouveau = new JMenuItem("Alphabetique");
-		jMenuItemNouveau.addActionListener(new EcouteurAlphabetique(m));
-		jMenuItemAleatoire = new JMenuItem("Aletoire");
+		jMenuItemAlphabetique = new JMenuItem("Alphabetique");
+		jMenuItemAlphabetique.addActionListener(new EcouteurAlphabetique(m));
+		jMenuItemAleatoire = new JMenuItem("Aleatoire");
 		jMenuItemAleatoire.addActionListener(new EcouteurAleatoire(m));
 		jMenuItemQuitter = new JMenuItem("Quitter");
 		jMenuItemQuitter.addActionListener(new EcouteurQuitter(m));
 		
 		jMenuItemTabou = new JMenuItem("Tabou");
 		jMenuItemTabou.addActionListener(new EcouteurAlgoTabou(m));
-		jMenuItemRecuit = new JMenuItem("Recuit simulé");
+		jMenuItemRecuit = new JMenuItem("Recuit simule");
 		jMenuItemRecuit.addActionListener(new EcouteurAlgoRecuit(m));
 		
 		jMenuItemTemperature = new JMenuItem("Temperature");
@@ -64,7 +64,7 @@ public class VueMenu extends JMenuBar implements Observer{
 		jMenuItemListe.addActionListener(new EcouteurListe(m));
 		
 		
-		jMenuFichier.add(jMenuItemNouveau);
+		jMenuFichier.add(jMenuItemAlphabetique);
 		jMenuFichier.add(jMenuItemAleatoire);
 		jMenuFichier.add(jMenuItemQuitter);
 		
@@ -79,12 +79,13 @@ public class VueMenu extends JMenuBar implements Observer{
 		this.add(JMenuOptions);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void update(Observable o, Object arg) {
-		JMenuOptions.show(m.getAlgo() != null);
-		jMenuItemNouveau.show(!m.getClavier().equals(Clavier.etatInitial));
 		jMenuItemListe.show(m.getAlgo() == Algo.TABOU);
 		jMenuItemTemperature.show(m.getAlgo() == Algo.RECUIT);
+		jMenuAlgorithme.show(!m.isRun());
+		JMenuOptions.show(m.getAlgo() != null && !m.isRun());
 	}
 
 }

@@ -17,9 +17,10 @@ public class Modele extends Observable implements Runnable{
 	protected double temperature = 500;
 	protected int tailleListe = 2000;
 	protected Clavier clavier;
-	protected int objectifAvant = -1;
+	protected int objectifAvant = 14560;
 	protected int objectifApres = -1;
 	protected int nbIter = -1;
+	protected boolean run = false;
 	
 	public Modele(){
 		historique = new LinkedList<Clavier>();
@@ -29,6 +30,7 @@ public class Modele extends Observable implements Runnable{
 		historique.add(clavier);
 		miseAJour();
 	}
+
 
 	public Algo getAlgo() {
 		return algo;
@@ -122,9 +124,11 @@ public int getObjectifAvant() {
 	public void run() {
 		nbIter = 0;
 		if(algo == Algo.RECUIT){
+			setRun(true);
 			AlgoRecuit algo = new AlgoRecuit(this);
 			algo.executer();
 		}else{
+			setRun(true);
 			AlgoTabou algo = new AlgoTabou(this);
 			algo.executer();
 		}
@@ -137,6 +141,10 @@ public int getObjectifAvant() {
 	
 	public int getNbIteration(){
 		return nbIter;
+	}
+	
+	public void resetNbIteration(){
+		nbIter = -1;
 	}
 	
 	public boolean hasNext(){
@@ -153,5 +161,17 @@ public int getObjectifAvant() {
 
 	public void pushClavier(Clavier clavier2) {
 		historique.add(clavier2);
+	}
+
+	public boolean isRun() {
+		return run;
+	}
+
+	public void setRun(boolean run) {
+		this.run = run;
+	}
+
+	public void setIteration(int i) {
+		nbIter = i;
 	}
 }

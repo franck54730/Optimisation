@@ -15,6 +15,7 @@ public class EcouteurPlay implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		m.resetNbIteration();
 		Thread t = new Thread((Runnable)m, "Traitement-Clavier");
 		t.start();
 		m.miseAJour();

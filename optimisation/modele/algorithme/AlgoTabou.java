@@ -16,8 +16,8 @@ public class AlgoTabou {
 	public void executer(){
 		ArrayList<Clavier> tabou = new ArrayList<Clavier>();
 		Clavier clavier = modele.getClavierInitial();
-		System.out.println(clavier);
-		System.out.println(clavier.objectif());
+//		System.out.println(clavier);
+//		System.out.println(clavier.objectif());
 		Clavier meilleurConnu = clavier;
 		int eMeilleur = clavier.objectif();
 		int nbInchange = 0;
@@ -47,8 +47,9 @@ public class AlgoTabou {
 			modele.miseAJour();
 		}
 		modele.pushClavier(meilleurConnu);
-		System.out.println("nbIter : "+modele.getNbIteration());
-		System.out.println(meilleurConnu);
-		System.out.println(meilleurConnu.objectif());
+		modele.setObjectifApres(meilleurConnu.objectif());
+//		System.out.println("nbIter : "+modele.getNbIteration());
+//		System.out.println(meilleurConnu);
+//		System.out.println(meilleurConnu.objectif());
 	}
 }

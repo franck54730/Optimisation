@@ -66,7 +66,7 @@ public class VueBoutons extends JPanel implements Observer{
 		
 		jLabelTaille.setVisible(m.getAlgo() != null);
 		jLabelTemperature.setVisible(m.getAlgo() != null);
-		jButtonPlay.setEnabled(m.getAlgo() != null);
+		jButtonPlay.setEnabled(m.getAlgo() != null && !m.isRun());
 		
 		if(m.getAlgo() !=  null){
 			jLabelAlgo.setText("Algorithme : "+m.getAlgo());

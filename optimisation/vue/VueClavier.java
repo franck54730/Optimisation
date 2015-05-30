@@ -35,12 +35,11 @@ public class VueClavier extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		while(m.hasNext()){
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
 			}
 			Clavier c = m.next();
