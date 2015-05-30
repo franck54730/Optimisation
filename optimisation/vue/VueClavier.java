@@ -35,7 +35,14 @@ public class VueClavier extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(m.hasNext()){
+		
+		while(m.hasNext()){
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Bloc catch généré automatiquement
+				e.printStackTrace();
+			}
 			Clavier c = m.next();
 			for (int i = 0; i < tabTouche.length; i++) {
 				for (int j = 0; j < tabTouche[0].length; j++) {

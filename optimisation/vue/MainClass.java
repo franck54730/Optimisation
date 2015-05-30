@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import optimisation.modele.Modele;
-import optimisation.modele.ViewUpdater;
 
 @SuppressWarnings("serial")
 public class MainClass extends JFrame{
@@ -27,9 +26,6 @@ public class MainClass extends JFrame{
         
         pack() ;
         setVisible(true);
-	    ViewUpdater vu = new ViewUpdater(m);
-	    Thread t = new Thread(vu);
-	    t.start();
 	}
 	
 	public static void main(String[] args) {

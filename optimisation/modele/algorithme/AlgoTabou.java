@@ -44,6 +44,7 @@ public class AlgoTabou {
 				nbInchange++;
 			}
 			modele.pushClavier(meilleurLocal);
+			modele.miseAJour();
 		}
 		modele.pushClavier(meilleurConnu);
 		System.out.println("nbIter : "+modele.getNbIteration());
