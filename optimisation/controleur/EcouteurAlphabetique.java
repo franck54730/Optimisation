@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 
 import optimisation.modele.Modele;
 
-public class EcouteurNouveau implements ActionListener {
+public class EcouteurAlphabetique implements ActionListener {
 	
 	protected Modele m;
 
-	public EcouteurNouveau(Modele mod) {
+	public EcouteurAlphabetique(Modele mod) {
 		this.m = mod;
 	}
 

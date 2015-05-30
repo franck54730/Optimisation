@@ -12,11 +12,11 @@ public class Modele extends Observable implements Runnable{
 
 	public enum Algo {RECUIT,TABOU};
 	
-	private LinkedList<Clavier> historique;
-	private Algo algo = Algo.TABOU;
-	private double temperature = 1000;
-	private int tailleListe = 2000;
-	private Clavier clavier;
+	protected LinkedList<Clavier> historique;
+	protected Algo algo;
+	protected double temperature = 500;
+	protected int tailleListe = 2000;
+	protected Clavier clavier;
 	
 	public Modele(){
 		historique = new LinkedList<Clavier>();
@@ -34,6 +34,10 @@ public class Modele extends Observable implements Runnable{
 	public void setAlgo(Algo algo) {
 		this.algo = algo;
 		miseAJour();
+	}
+	
+	public Clavier getClavier(){
+		return clavier;
 	}
 
 	public double getTemperature() {
@@ -65,9 +69,7 @@ public class Modele extends Observable implements Runnable{
 		miseAJour();
 	}
 
-	@SuppressWarnings("static-access")
 	public void randomClavier(){
-		//Liste de lettre aléatoire
 		ArrayList<Integer> lettre = new ArrayList<Integer>();
 		while(lettre.size()<26){
 			Random l = new Random();
@@ -76,13 +78,7 @@ public class Modele extends Observable implements Runnable{
 				lettre.add(touche);
 			}
 		}
-		for (int i = 0; i < lettre.size(); i++) {
-			System.out.print(lettre.get(i)+" ");
-		}
-		System.out.println();
-		
-		//Recherche d'un indice vide + ajout lettre
-		
+
 		Clavier c = new Clavier();
 		c.ClavierVide();
 		
@@ -91,7 +87,6 @@ public class Modele extends Observable implements Runnable{
 			int hauteur = h.nextInt(Clavier.hauteur);
 			Random l = new Random();
 			int largeur = l.nextInt(Clavier.largeur);
-			System.out.println(lettre.size());
 			if(c.getLettre(largeur, hauteur) == ' '){
 				c.setLettre(largeur, hauteur, lettre.get(0));
 				lettre.remove(0);

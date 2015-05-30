@@ -10,9 +10,13 @@ import javax.swing.JMenuItem;
 import optimisation.controleur.EcouteurAleatoire;
 import optimisation.controleur.EcouteurAlgoRecuit;
 import optimisation.controleur.EcouteurAlgoTabou;
-import optimisation.controleur.EcouteurNouveau;
+import optimisation.controleur.EcouteurListe;
+import optimisation.controleur.EcouteurAlphabetique;
 import optimisation.controleur.EcouteurQuitter;
+import optimisation.controleur.EcouteurTemperature;
+import optimisation.modele.Clavier;
 import optimisation.modele.Modele;
+import optimisation.modele.Modele.Algo;
 
 @SuppressWarnings("serial")
 public class VueMenu extends JMenuBar implements Observer{
@@ -21,6 +25,7 @@ public class VueMenu extends JMenuBar implements Observer{
 	
 	protected JMenu jMenuFichier;
 	protected JMenu jMenuAlgorithme;
+	protected JMenu JMenuOptions;
 	
 	protected JMenuItem jMenuItemNouveau;
 	protected JMenuItem jMenuItemAleatoire;
@@ -28,6 +33,9 @@ public class VueMenu extends JMenuBar implements Observer{
 	
 	protected JMenuItem jMenuItemTabou;
 	protected JMenuItem jMenuItemRecuit;
+	
+	protected JMenuItem jMenuItemTemperature;
+	protected JMenuItem jMenuItemListe;
 
 	public VueMenu(Modele mod) {
 		super();
@@ -36,9 +44,10 @@ public class VueMenu extends JMenuBar implements Observer{
 		
 		jMenuFichier = new JMenu("Fichier");
 		jMenuAlgorithme = new JMenu("Algorithme");
+		JMenuOptions = new JMenu("Option(s)");
 		
-		jMenuItemNouveau = new JMenuItem("Nouveau");
-		jMenuItemNouveau.addActionListener(new EcouteurNouveau(m));
+		jMenuItemNouveau = new JMenuItem("Alphabetique");
+		jMenuItemNouveau.addActionListener(new EcouteurAlphabetique(m));
 		jMenuItemAleatoire = new JMenuItem("Aletoire");
 		jMenuItemAleatoire.addActionListener(new EcouteurAleatoire(m));
 		jMenuItemQuitter = new JMenuItem("Quitter");
@@ -49,6 +58,12 @@ public class VueMenu extends JMenuBar implements Observer{
 		jMenuItemRecuit = new JMenuItem("Recuit simulé");
 		jMenuItemRecuit.addActionListener(new EcouteurAlgoRecuit(m));
 		
+		jMenuItemTemperature = new JMenuItem("Temperature");
+		jMenuItemTemperature.addActionListener(new EcouteurTemperature(m));
+		jMenuItemListe = new JMenuItem("Liste Tabou");
+		jMenuItemListe.addActionListener(new EcouteurListe(m));
+		
+		
 		jMenuFichier.add(jMenuItemNouveau);
 		jMenuFichier.add(jMenuItemAleatoire);
 		jMenuFichier.add(jMenuItemQuitter);
@@ -56,13 +71,20 @@ public class VueMenu extends JMenuBar implements Observer{
 		jMenuAlgorithme.add(jMenuItemTabou);
 		jMenuAlgorithme.add(jMenuItemRecuit);
 		
+		JMenuOptions.add(jMenuItemTemperature);
+		JMenuOptions.add(jMenuItemListe);
+		
 		this.add(jMenuFichier);
 		this.add(jMenuAlgorithme);
+		this.add(JMenuOptions);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+		JMenuOptions.show(m.getAlgo() != null);
+		jMenuItemNouveau.show(!m.getClavier().equals(Clavier.etatInitial));
+		jMenuItemListe.show(m.getAlgo() == Algo.TABOU);
+		jMenuItemTemperature.show(m.getAlgo() == Algo.RECUIT);
 	}
 
 }

@@ -63,13 +63,24 @@ public class VueBoutons extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		jLabelAlgo.setText("Algorithme : "+m.getAlgo());
+		
+		jLabelTaille.setVisible(m.getAlgo() != null);
+		jLabelTemperature.setVisible(m.getAlgo() != null);
+		jButtonPlay.setEnabled(m.getAlgo() != null);
+		
+		if(m.getAlgo() !=  null){
+			jLabelAlgo.setText("Algorithme : "+m.getAlgo());
+		}
+		else{
+			jLabelAlgo.setText("Algorithme a choisir");
+		}
+		
 		if(m.getAlgo() == Algo.RECUIT){
-			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
+			jLabelTaille.setText("Taille liste : X");
 			jLabelTemperature.setText("Temperature : "+(int)m.getTemperature());
-		}else{
+		}else if(m.getAlgo() == Algo.TABOU){
 			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
-			jLabelTemperature.setText("Pas de temperature");
+			jLabelTemperature.setText("Temperature : X");
 		}
 	}
 
