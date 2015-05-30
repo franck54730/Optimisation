@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import optimisation.modele.Modele;
+import optimisation.modele.ViewUpdater;
 
 @SuppressWarnings("serial")
 public class MainClass extends JFrame{
@@ -15,7 +16,6 @@ public class MainClass extends JFrame{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    Modele m = new Modele();
-	    
 	    VueGraphique vg = new VueGraphique(m);
 	    
 	    VueBoutons vb = new VueBoutons(m);
@@ -27,6 +27,9 @@ public class MainClass extends JFrame{
         
         pack() ;
         setVisible(true);
+	    ViewUpdater vu = new ViewUpdater(m);
+	    Thread t = new Thread(vu);
+	    t.start();
 	}
 	
 	public static void main(String[] args) {

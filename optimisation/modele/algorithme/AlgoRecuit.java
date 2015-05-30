@@ -13,23 +13,23 @@ public class AlgoRecuit {
 	
 	public void executer(){
 		double temperature = modele.getTemperature();
+		System.out.println(temperature);
 		Clavier clavier = modele.getClavierInitial();
 		modele.pushClavier(clavier);
-		try {
-			Thread.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		modele.miseAJour();
+//		try {
+//			Thread.sleep(1);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		modele.miseAJour();
 		System.out.println(clavier);
-		System.out.println(clavier.getEnnergie());
-		int iteration = 0;
-		int e = clavier.getEnnergie();
-		
-		while(temperature>0 && (iteration < modele.getTailleListe() || e < Clavier.EMAX)){
+		System.out.println(clavier.objectif());
+		int e = clavier.objectif();
+		System.out.println(temperature+" > 0 && "+e+" < "+Clavier.EMAX );
+		while(temperature > 0 && e < Clavier.EMAX){
 			Clavier voisin = clavier.voisin();
 
-			int newE = voisin.getEnnergie();
+			int newE = voisin.objectif();
 			int deltaE = e-newE;
 			double rapport = -((double)deltaE/(double)temperature);
 			if(newE > e || Math.random()<Math.exp(rapport)){
@@ -37,19 +37,18 @@ public class AlgoRecuit {
 				e = newE;
 				temperature-= 0.1;
 				modele.pushClavier(clavier);
-				iteration++;
 			}
 			modele.pushClavier(clavier);
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
-			}
-			modele.miseAJour();
+//			try {
+//				Thread.sleep(1);
+//			} catch (InterruptedException ex) {
+//				// TODO Auto-generated catch block
+//				ex.printStackTrace();
+//			}
+//			modele.miseAJour();
 		}
-		modele.hasNext();
 		System.out.println(clavier);
-		System.out.println(clavier.getEnnergie());
+		System.out.println(clavier.objectif());
+		modele.setObjectifApres(clavier.objectif());
 	}
 }

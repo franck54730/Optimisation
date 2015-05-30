@@ -17,18 +17,18 @@ public class AlgoTabou {
 		ArrayList<Clavier> tabou = new ArrayList<Clavier>();
 		Clavier clavier = modele.getClavierInitial();
 		System.out.println(clavier);
-		System.out.println(clavier.getEnnergie());
+		System.out.println(clavier.objectif());
 		Clavier meilleurConnu = null;
 		int eMeilleur = 0;
-		int iteration = 0;
-		while(iteration < modele.getTailleListe()){
+		int nbInchangé = 0;
+		while(nbInchangé < modele.getTailleListe()){
 			tabou.add(clavier);
 			ArrayList<Clavier> lesFils = clavier.filsNonTabou(tabou);
 			Clavier meilleur = null;
 			int max = Integer.MIN_VALUE;
 			int eFils = 0;
 			for(Clavier fils : lesFils){
-				eFils = fils.getEnnergie();
+				eFils = fils.objectif();
 				if(eFils > max){
 					meilleur = fils;
 				}	
@@ -38,11 +38,10 @@ public class AlgoTabou {
 				eMeilleur = eFils;
 			}
 			modele.pushClavier(meilleurConnu);
-			iteration++;
-			System.out.println(iteration);
+			//iteration++;
 			clavier = meilleurConnu;
 		}
 		System.out.println(clavier);
-		System.out.println(clavier.getEnnergie());
+		System.out.println(clavier.objectif());
 	}
 }

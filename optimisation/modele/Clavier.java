@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Clavier {
 	
-	public static final int EMAX = 10000;
+	public static final int EMAX = 40000;
 	public static int largeur = 10;
 	public static int hauteur = 4;
 	public static int[][] bigramme = new int[26][26];
@@ -110,7 +110,12 @@ public class Clavier {
 		}
 	}
 
-	public int getEnnergie() {
+	/**
+	 * fonction objectif qui renvoi un entier representant la qualité du clavier
+	 * qui est la somme pour chaque touche de la valeur de son bigramme avec ses touche voisine
+	 * @return
+	 */
+	public int objectif() {
 		int rep = 0;
 		for(int x = 0; x < largeur; x++){
 			for (int y = 0; y < hauteur; y++) {
@@ -136,6 +141,10 @@ public class Clavier {
 		return rep;
 	}
 
+	/**
+	 * renvoi un clavier voisin de celui ci (juste deux case sont echangé aléatoirement)
+	 * @return
+	 */
 	public Clavier voisin() {
 		Clavier rep = new Clavier(this);
 		Random r = new Random();
@@ -168,6 +177,11 @@ public class Clavier {
 		return sb.toString();
 	}
 	
+	/**
+	 * retourne une liste avec tout les fils qui ne font pas partie de la liste tabou
+	 * @param tabou
+	 * @return
+	 */
 	public ArrayList<Clavier> filsNonTabou(ArrayList<Clavier> tabou){
 		ArrayList<Clavier> rep = new ArrayList<Clavier>();
 		for(int x = 0; x < largeur; x++){
@@ -187,6 +201,12 @@ public class Clavier {
 		return rep;
 	}
 	
+	/**
+	 * echange la case x,y avec celle sur sa droite
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Clavier swapDroite(int x,int y){
 		Clavier rep = new Clavier(this);
 		Touche tmp = rep.clavier[x][y];
@@ -195,6 +215,12 @@ public class Clavier {
 		return rep;
 	}
 	
+	/**
+	 * echange la case x,y avec celle sur le bas
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Clavier swapBas(int x,int y){
 		Clavier rep = new Clavier(this);
 		Touche tmp = rep.clavier[x][y];

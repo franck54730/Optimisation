@@ -17,6 +17,9 @@ public class Modele extends Observable implements Runnable{
 	protected double temperature = 500;
 	protected int tailleListe = 2000;
 	protected Clavier clavier;
+	protected int tempsExecution = 0;
+	protected int objectifAvant = 0;
+	protected int objectifApres = 0;
 	
 	public Modele(){
 		historique = new LinkedList<Clavier>();
@@ -40,6 +43,30 @@ public class Modele extends Observable implements Runnable{
 		return clavier;
 	}
 
+public int getObjectifAvant() {
+		return objectifAvant;
+	}
+
+	public void setObjectifAvant(int objectifAvant) {
+		this.objectifAvant = objectifAvant;
+	}
+
+	public int getObjectifApres() {
+		return objectifApres;
+	}
+
+	public void setObjectifApres(int objectifApres) {
+		this.objectifApres = objectifApres;
+	}
+
+	/**
+	 * renvoie le temps d'execution du dernier algo sous forme 1.500s
+	 * @return
+	 */
+	public String getTempsExecution(){
+		return (tempsExecution/1000)+"."+(tempsExecution%1000)+"s";
+	}
+	
 	public double getTemperature() {
 		return temperature;
 	}
@@ -65,6 +92,7 @@ public class Modele extends Observable implements Runnable{
 	
 	public void reinitialiserClavier(){
 		clavier = Clavier.etatInitial;
+		objectifAvant = clavier.objectif();
 		historique.add(Clavier.etatInitial);
 		miseAJour();
 	}
@@ -94,6 +122,7 @@ public class Modele extends Observable implements Runnable{
 		}
 		clavier = c;
 		historique.add(clavier);
+		objectifAvant = clavier.objectif();
 		miseAJour();
 	}
 	
