@@ -13,22 +13,14 @@ public class AlgoRecuit {
 	
 	public void executer(){
 		double temperature = modele.getTemperature();
-		System.out.println(temperature);
 		Clavier clavier = modele.getClavierInitial();
 		modele.pushClavier(clavier);
-//		try {
-//			Thread.sleep(1);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		modele.miseAJour();
 		System.out.println(clavier);
 		System.out.println(clavier.objectif());
 		int e = clavier.objectif();
-		System.out.println(temperature+" > 0 && "+e+" < "+Clavier.EMAX );
 		while(temperature > 0 && e < Clavier.EMAX){
+			modele.incIter();
 			Clavier voisin = clavier.voisin();
-
 			int newE = voisin.objectif();
 			int deltaE = e-newE;
 			double rapport = -((double)deltaE/(double)temperature);
@@ -38,15 +30,8 @@ public class AlgoRecuit {
 				temperature-= 0.1;
 				modele.pushClavier(clavier);
 			}
-			modele.pushClavier(clavier);
-//			try {
-//				Thread.sleep(1);
-//			} catch (InterruptedException ex) {
-//				// TODO Auto-generated catch block
-//				ex.printStackTrace();
-//			}
-//			modele.miseAJour();
 		}
+		System.out.println("nbIter : "+modele.getNbIteration());
 		System.out.println(clavier);
 		System.out.println(clavier.objectif());
 		modele.setObjectifApres(clavier.objectif());

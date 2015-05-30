@@ -18,30 +18,36 @@ public class AlgoTabou {
 		Clavier clavier = modele.getClavierInitial();
 		System.out.println(clavier);
 		System.out.println(clavier.objectif());
-		Clavier meilleurConnu = null;
-		int eMeilleur = 0;
-		int nbInchangé = 0;
-		while(nbInchangé < modele.getTailleListe()){
+		Clavier meilleurConnu = clavier;
+		int eMeilleur = clavier.objectif();
+		int nbInchange = 0;
+		while(nbInchange < modele.getTailleListe()){
+			modele.incIter();
 			tabou.add(clavier);
 			ArrayList<Clavier> lesFils = clavier.filsNonTabou(tabou);
-			Clavier meilleur = null;
+			Clavier meilleurLocal = null;
 			int max = Integer.MIN_VALUE;
 			int eFils = 0;
 			for(Clavier fils : lesFils){
 				eFils = fils.objectif();
 				if(eFils > max){
-					meilleur = fils;
-				}	
+					meilleurLocal = fils;
+					clavier = meilleurLocal;
+					max = eFils;
+				}
 			}
 			if(eMeilleur < eFils){
-				meilleurConnu = meilleur;
+				meilleurConnu = meilleurLocal;
 				eMeilleur = eFils;
+				nbInchange = 0;
+			}else{
+				nbInchange++;
 			}
-			modele.pushClavier(meilleurConnu);
-			//iteration++;
-			clavier = meilleurConnu;
+			modele.pushClavier(meilleurLocal);
 		}
-		System.out.println(clavier);
-		System.out.println(clavier.objectif());
+		modele.pushClavier(meilleurConnu);
+		System.out.println("nbIter : "+modele.getNbIteration());
+		System.out.println(meilleurConnu);
+		System.out.println(meilleurConnu.objectif());
 	}
 }
