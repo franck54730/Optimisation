@@ -28,7 +28,20 @@ executer pressé, une succession de clavier apparaissent, ils correspondent respe
 
 
 
+Modelisation choisi
 
+Tabou
+
+taille de l'espace de recherche : 26 !  * (46 parmi 14)
+mouvements possibles : on crée tous les successeur, clavier identique a par deux case contigue qui ont etait echangé
+critere d'arret : l'algorithme s'arrete quand le cout cesse d'augmenter sur X claviers d'affilé X étant le parametre.
+
+
+Recuit simulé
+
+taille de l'espace de recherche : 26 !  * (46 parmi 14)
+mouvements possibles : On choisit une permutation aléatoire de deux lettres de notre clavier courant 
+ critere d'arret : l'algorithme s'arrete quand la temperature a atteint 0.
 
 
 
