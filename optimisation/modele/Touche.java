@@ -56,4 +56,8 @@ public class Touche {
 	public String toString(){
 		return "{"+alphabet[lettre]+"}";
 	}
+
+	public void setLettre(int l) {
+		lettre = l;
+	}
 }

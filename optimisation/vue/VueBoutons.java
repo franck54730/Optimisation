@@ -66,7 +66,7 @@ public class VueBoutons extends JPanel implements Observer{
 		jLabelAlgo.setText("Algorithme : "+m.getAlgo());
 		if(m.getAlgo() == Algo.RECUIT){
 			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
-			jLabelTemperature.setText("Temperature : "+m.getTemperature());
+			jLabelTemperature.setText("Temperature : "+(int)m.getTemperature());
 		}else{
 			jLabelTaille.setText("Taille liste : "+m.getTailleListe());
 			jLabelTemperature.setText("Pas de temperature");

@@ -7,8 +7,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import optimisation.controleur.EcouteurAleatoire;
 import optimisation.controleur.EcouteurAlgoRecuit;
 import optimisation.controleur.EcouteurAlgoTabou;
+import optimisation.controleur.EcouteurNouveau;
 import optimisation.controleur.EcouteurQuitter;
 import optimisation.modele.Modele;
 
@@ -21,6 +23,7 @@ public class VueMenu extends JMenuBar implements Observer{
 	protected JMenu jMenuAlgorithme;
 	
 	protected JMenuItem jMenuItemNouveau;
+	protected JMenuItem jMenuItemAleatoire;
 	protected JMenuItem jMenuItemQuitter;
 	
 	protected JMenuItem jMenuItemTabou;
@@ -35,6 +38,9 @@ public class VueMenu extends JMenuBar implements Observer{
 		jMenuAlgorithme = new JMenu("Algorithme");
 		
 		jMenuItemNouveau = new JMenuItem("Nouveau");
+		jMenuItemNouveau.addActionListener(new EcouteurNouveau(m));
+		jMenuItemAleatoire = new JMenuItem("Aletoire");
+		jMenuItemAleatoire.addActionListener(new EcouteurAleatoire(m));
 		jMenuItemQuitter = new JMenuItem("Quitter");
 		jMenuItemQuitter.addActionListener(new EcouteurQuitter(m));
 		
@@ -44,6 +50,7 @@ public class VueMenu extends JMenuBar implements Observer{
 		jMenuItemRecuit.addActionListener(new EcouteurAlgoRecuit(m));
 		
 		jMenuFichier.add(jMenuItemNouveau);
+		jMenuFichier.add(jMenuItemAleatoire);
 		jMenuFichier.add(jMenuItemQuitter);
 		
 		jMenuAlgorithme.add(jMenuItemTabou);

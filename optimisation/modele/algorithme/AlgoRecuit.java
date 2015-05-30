@@ -15,6 +15,13 @@ public class AlgoRecuit {
 		double temperature = modele.getTemperature();
 		Clavier clavier = modele.getClavierInitial();
 		modele.pushClavier(clavier);
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		modele.miseAJour();
 		System.out.println(clavier);
 		System.out.println(clavier.getEnnergie());
 		int iteration = 0;
@@ -33,6 +40,13 @@ public class AlgoRecuit {
 				iteration++;
 			}
 			modele.pushClavier(clavier);
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
+			modele.miseAJour();
 		}
 		System.out.println(clavier);
 		System.out.println(clavier.getEnnergie());

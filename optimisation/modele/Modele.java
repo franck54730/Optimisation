@@ -1,7 +1,9 @@
 package optimisation.modele;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Observable;
+import java.util.Random;
 
 import optimisation.modele.algorithme.AlgoRecuit;
 
@@ -12,7 +14,7 @@ public class Modele extends Observable implements Runnable{
 	private LinkedList<Clavier> historique;
 	private Algo algo = Algo.RECUIT;
 	private double temperature = 1000;
-	private int tailleListe = 10000000;
+	private int tailleListe = 10000;
 	private Clavier clavier;
 	
 	public Modele(){
@@ -62,11 +64,42 @@ public class Modele extends Observable implements Runnable{
 		miseAJour();
 	}
 
+	@SuppressWarnings("static-access")
 	public void randomClavier(){
-		clavier = Clavier.etatInitial;
-		historique.add(Clavier.etatInitial);
+		//Liste de lettre aléatoire
+		ArrayList<Integer> lettre = new ArrayList<Integer>();
+		while(lettre.size()<26){
+			Random l = new Random();
+			int touche = l.nextInt(26);
+			if(!lettre.contains(touche)){
+				lettre.add(touche);
+			}
+		}
+		for (int i = 0; i < lettre.size(); i++) {
+			System.out.print(lettre.get(i)+" ");
+		}
+		System.out.println();
+		
+		//Recherche d'un indice vide + ajout lettre
+		
+		Clavier c = new Clavier();
+		c.ClavierVide();
+		
+		while(!lettre.isEmpty()){
+			Random h = new Random();
+			int hauteur = h.nextInt(Clavier.hauteur);
+			
+			Random l = new Random();
+			int largeur = l.nextInt(Clavier.largeur);
+			System.out.println(lettre.size());
+			if(c.getLettre(largeur, hauteur) == ' '){
+				c.setLettre(largeur, hauteur, lettre.get(0));
+				lettre.remove(0);
+			}
+		}
+		historique.add(c);
 		miseAJour();
-	}
+		}
 	
 	@Override
 	public void run() {
@@ -81,7 +114,7 @@ public class Modele extends Observable implements Runnable{
 	}
 	
 	public boolean hasNext(){
-		return historique.isEmpty();
+		return historique.size() != 0;
 	}
 	
 	public Clavier next(){
