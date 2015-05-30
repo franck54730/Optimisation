@@ -25,10 +25,10 @@ public class VueClavier extends JPanel implements Observer{
 		this.setPreferredSize(new Dimension(500,200));
 		tabTouche = new ToucheGraphique[Clavier.largeur][Clavier.hauteur];
 		this.setLayout(new GridLayout(Clavier.hauteur, Clavier.largeur, 0, 0));
-		for (int i = 0; i < tabTouche.length; i++) {
-			for (int j = 0; j < tabTouche[0].length; j++) {
-				tabTouche[i][j] = new ToucheGraphique('X');
-				this.add(tabTouche[i][j]);
+		for (int i = 0; i < tabTouche[0].length; i++) {
+			for (int j = 0; j < tabTouche.length; j++) {
+				tabTouche[j][i] = new ToucheGraphique(' ');
+				this.add(tabTouche[j][i]);
 			}
 		}
 	}
@@ -42,13 +42,6 @@ public class VueClavier extends JPanel implements Observer{
 					tabTouche[i][j].setText(c.getLettre(i, j)+"");
 				}
 			}
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			m.miseAJour();
 		}
     }
 }

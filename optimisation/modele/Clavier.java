@@ -28,8 +28,20 @@ public class Clavier {
 		}
 	}
 	
+	public void ClavierVide(){
+		for(int x = 0; x < largeur; x++){
+			for(int y = 0; y < hauteur; y++){
+				this.clavier[x][y] = new Touche(26);
+			}
+		}
+	}
+	
 	public char getLettre(int x, int y){
 		return clavier[x][y].getLettreToChar();
+	}
+	
+	public void setLettre(int x, int y, int l){
+		clavier[x][y].setLettre(l);
 	}
 	
 	public static void genererEtatInitial(){

@@ -68,4 +68,8 @@ public class Touche {
 		}
 		return true;
 	}
+
+	public void setLettre(int l) {
+		lettre = l;
+	}
 }

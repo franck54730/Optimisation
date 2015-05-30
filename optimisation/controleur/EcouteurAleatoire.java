@@ -5,19 +5,17 @@ import java.awt.event.ActionListener;
 
 import optimisation.modele.Modele;
 
-public class EcouteurPlay implements ActionListener {
+public class EcouteurAleatoire implements ActionListener {
 	
 	protected Modele m;
 
-	public EcouteurPlay(Modele mod) {
-		this.m= mod;
+	public EcouteurAleatoire(Modele mod) {
+		this.m = mod;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Thread t = new Thread((Runnable)m, "Traitement-Clavier");
-		t.start();
-		m.miseAJour();
+		m.randomClavier();
 	}
 
 }
